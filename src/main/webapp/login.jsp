@@ -43,6 +43,12 @@
 		</div>
 	</nav>
 	<div class="container mt-5">
+		<c:if test="${msgError}">
+			<div class="alert alert-danger" role="alert">
+			  <c:out value="${msgError}"></c:out>
+			</div>
+		</c:if>
+	
 		<h1>Formulario de Ingreso</h1>
 		<form action="loginUsuario" method="post">
 			<label for="correo" class="form-label">Correo:</label> <input

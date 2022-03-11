@@ -43,14 +43,14 @@
 		</div>
 	</nav>
 	<div class="container mt-5">
-		<c:if test="${msjError != null }">
+		<c:if test="${msgError != null }">
 			<div class="alert alert-danger" role="alert">
-				<c:out value="${msjError}"></c:out>
+				<c:out value="${msgError}"></c:out>
 			</div>
 		</c:if>
 		
 		<h1>Formulario de Registro</h1>
-		<form action="registrarUsuario" method="get">
+		<form action="registrarUsuario" method=post>
 			<label for="nombre" class="form-label">Nombre:</label> <input
 				type="text" class="form-control" id="nombre" name="nombre"
 				placeholder="Ingresar nombre"> <br> <label

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.desafiolatam.DAO.UsuarioDAOImpl;
+import com.desafiolatam.models.Usuario;
+
 
 @WebServlet("/registrarUsuario")
 public class RegistrarUsuario extends HttpServlet {
@@ -17,28 +20,36 @@ public class RegistrarUsuario extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher vista = null;
+		
 		//capturando parametros
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
 		String correo = request.getParameter("correo");
 		String password = request.getParameter("password");
 		String genero = request.getParameter("genero");
+		
 		System.out.println(nombre+" "+apellido+" "+correo+"" +password+" " +genero);
 		//validar
 		if(nombre.isBlank() || apellido.isEmpty() || correo.isEmpty() || password.isEmpty() || genero == null) {
 			
 			//pasar valores al jsp o servlet
-			request.setAttribute("msjError","Datos faltantes, por favor verifique" );
-			
-			vista = request.getRequestDispatcher("registro.jsp");
+			request.setAttribute("msgError","Datos faltantes, por favor verifique" );
+			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		}else {
-			//guardado de los datos
+			//guardado de los datos (DTO)
+			Usuario usuario = new Usuario(nombre,apellido, correo,password,Integer.parseInt(genero));
 			
-			vista =  request.getRequestDispatcher("/login");
+			UsuarioDAOImpl usuarioDAOImpl  = new UsuarioDAOImpl();
+			int resultadoInsert = usuarioDAOImpl.crearUsuario(usuario);
+			
+			if(resultadoInsert ==1) {
+				request.getRequestDispatcher("/login").forward(request, response);
+			}else {
+				request.setAttribute("msgError","Error al registrarse" );
+				request.getRequestDispatcher("registro.jsp").forward(request, response);
+			}
 		}
-		System.out.println(vista);
-		vista.forward(request, response);
+
 	}
 
 
