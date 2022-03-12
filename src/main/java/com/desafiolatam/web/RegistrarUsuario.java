@@ -40,14 +40,22 @@ public class RegistrarUsuario extends HttpServlet {
 			Usuario usuario = new Usuario(nombre,apellido, correo,password,Integer.parseInt(genero));
 			
 			UsuarioDAOImpl usuarioDAOImpl  = new UsuarioDAOImpl();
-			int resultadoInsert = usuarioDAOImpl.crearUsuario(usuario);
+			Usuario usuarioExiste = usuarioDAOImpl.obtenerUsuarioEmail(correo);
 			
-			if(resultadoInsert ==1) {
-				request.getRequestDispatcher("/login").forward(request, response);
+			if(usuarioExiste == null) {//no existe, si es null
+				int resultadoInsert = usuarioDAOImpl.crearUsuario(usuario);
+				
+				if(resultadoInsert ==1) {
+					request.getRequestDispatcher("/login").forward(request, response);
+				}else {
+					request.setAttribute("msgError","Error al registrarse" );
+					request.getRequestDispatcher("registro.jsp").forward(request, response);
+				}
 			}else {
-				request.setAttribute("msgError","Error al registrarse" );
+				request.setAttribute("msgError","Error, Error al registrarse" );
 				request.getRequestDispatcher("registro.jsp").forward(request, response);
 			}
+
 		}
 
 	}

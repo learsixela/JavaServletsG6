@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +32,7 @@
 				<form class="d-flex">
 					<div class="btn-group dropstart">
 						<button type="button" class="btn btn-secondary dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Usuario</button>
+							data-bs-toggle="dropdown" aria-expanded="false">Usuario</button>
 						<ul class="dropdown-menu" style="">
 							<li><a class="dropdown-item" href="#">Editar</a></li>
 							<li><a class="dropdown-item" href="#">Inicio</a></li>
@@ -44,29 +44,36 @@
 			</div>
 		</div>
 	</nav>
+	
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-sm-4">
-				
-			</div>
-			<div class="col-sm-8">
-				<h2>Creacion Servlet</h2>
-				<h5>Como crear Servlet, Mar 8, 2022</h5>
-				<div class="fakeimg">Fake Image</div>
-				<p>Pasos a seguir..</p>
-				<p>Con el proyecto seleccionado, ejecuta File -> New -> Servlet.
-					A continuación, presiona Next -> Next, activa la casilla Generate
-					web.xml deployment descriptor para generar el fichero web.xml por
-					si en un futuro queremos añadir configuraciones relacionadas con
-					nuestro proyecto web. Pulsa Finish.</p>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-6">
 
-				<h2 class="mt-5">Creacion JSP</h2>
-				<h5>Como crear JSP, Mar 8, 2022</h5>
-				<div class="fakeimg">Fake Image</div>
-				<p>Pasos a seguir..</p>
-				<p>Con el proyecto seleccionado,posicionado en src/main/webapp,
-					ejecuta New -> JSP FILE. En la apntalla desplegada escribe el
-					nombre del archivo con la extension jsp. Pulsa Finish.</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Marca</th>
+							<th scope="col">Modelo</th>
+							<th scope="col">Color</th>
+							<th scope="col">Velocidad</th>
+							<th scope="col">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>marca</td>
+							<td>modelos</td>
+							<td>color</td>
+							<td>velocidad</td>
+							<td>acciones</td>
+						</tr>
+						
+					</tbody>
+				</table>
+
 			</div>
 		</div>
 	</div>

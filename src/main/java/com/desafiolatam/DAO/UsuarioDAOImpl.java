@@ -18,7 +18,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public int crearUsuario(Usuario usuario) {
 		int resultado = 0;
-		String query = "INSERT INTO usuarios(nombre,apellido,email,password,genero) values('"+usuario.getNombre()+
+		String query = "INSERT INTO usuarios(nombre,apellido,correo,password,genero) values('"+usuario.getNombre()+
 				"','"+usuario.getApellido()+"','"+usuario.getEmail()+"','"+usuario.getPassword()+"','"+usuario.getGenero()+"')";
 		
 		System.out.println("query: "+query);
@@ -88,7 +88,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 	@Override
 	public ArrayList<Usuario> obtenerListaUsuarios() {
-		ArrayList<Usuario> listaUsuarios = null;
+		ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		String query = "SELECT * FROM USUARIOS ";
 		
 		try {
@@ -97,7 +97,17 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			resultado = stmt.executeQuery(query);
 			
 			while(resultado.next()) {
+				//recorrer para captura los datos
+				Integer usuarioId = resultado.getInt(1);//resultado.getInt("id");
+				String nombre = resultado.getString(2);//resultado.getString("nombre");
+				String apellido = resultado.getString(3);
+				String email = resultado.getString(4);
+				String password = resultado.getString(5);
+				int genero = resultado.getInt(6);
 				
+				//llenar el objeto
+				Usuario usuario = new Usuario(usuarioId,nombre, apellido,email,password, genero);
+				listaUsuarios.add(usuario);
 			}
 			
 		} catch (Exception e) {
